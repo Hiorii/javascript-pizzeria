@@ -79,6 +79,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initAccordion(){
       const thisProduct = this;     
@@ -125,13 +126,25 @@
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
         for(let optionID in param.options){                   
-          const option = param.options[optionID];             
-          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionID) > -1;
+          const option = param.options[optionID];                      
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionID) > -1;         
+          const imgSelectorClass = '.' + paramId + '-' + optionID;    
+          const toppingsIMG = thisProduct.imageWrapper.querySelectorAll(imgSelectorClass);                   
+          if(optionSelected){
+            for(let topping of toppingsIMG){                           
+              topping.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else if(!optionSelected){
+              for(let topping of toppingsIMG){
+                topping.classList.remove(classNames.menuProduct.imageVisible);
+              }
+            }
+          
+         
           if(optionSelected && !option.default){         
-            price = price + option.price; 
-            console.log(price);         
+            price = price + option.price;                    
           }          
-          if(!optionSelected && option.default){          
+          else if(!optionSelected && option.default){          
               price = price - option.price;            
           }        
         }
