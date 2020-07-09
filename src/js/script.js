@@ -233,6 +233,9 @@
       if(newValue != thisWidget.value && newValue>=settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.value = newValue;
         thisWidget.announce();
+        thisWidget.input.addEventListener('focusout', (event) => {
+          event.target.value = thisWidget.value;
+        });
       }
       thisWidget.input.value = thisWidget.value;      
     }   
@@ -247,7 +250,7 @@
       thisWidget.linkIncrease.addEventListener('click', function(event){
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
-      });
+      });      
     } 
     announce(){
       const thisWidget = this;
@@ -354,9 +357,14 @@
       for(let product of thisCart.products){
         thisCart.subtotalPrice += product.price;
         thisCart.totalNumber += product.amount; 
+      }   
+      if(thisCart.subtotalPrice === 0){   
+        thisCart.totalPrice = 0;
+        thisCart.deliveryFee = 0;
+      } else {
+        thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+        thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
       }
-      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-
       console.log(thisCart.totalNumber, thisCart.subtotalPrice, thisCart.totalPrice);
 
       for(let key of thisCart.renderTotalsKeys){

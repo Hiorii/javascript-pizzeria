@@ -30,7 +30,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "json-server": "^0.16.1"
+        "autoprefixer": "^9.8.4",
+        "json-server": "^0.16.1",
+        "postcss-cli-simple": "^3.1.0"
     },
     "devDependencies": {
         "autoprefixer-cli": "^1.0.0",
