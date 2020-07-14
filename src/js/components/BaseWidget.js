@@ -3,6 +3,7 @@ class BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom = {};
+    
     thisWidget.dom.wrapper = wrapperElement;
 
     thisWidget.correctValue = initialValue;
@@ -26,7 +27,7 @@ class BaseWidget{
     thisWidget.rendeerValue();
   }
   setValue(value){
-    const thisWidget = this;
+    const thisWidget = this;    
 
     thisWidget.value = value;
   }

@@ -38,7 +38,6 @@ class Product{
     for(let activeProduct of activeProducts){       
       activeProduct.classList.remove(classNames.menuProduct.wrapperActive);  
     }
-    //const clikcableElement = thisProduct.element.querySelector(select.menuProduct.clickable);      
     thisProduct.accordionTrigger.addEventListener('click', function(event){
       event.preventDefault();
       thisProduct.element.classList.toggle('active');
@@ -124,8 +123,6 @@ class Product{
 
     thisProduct.name = thisProduct.data.name;
     thisProduct.amount = thisProduct.amountWidget.value;
-
-    //app.cart.add(thisProduct);
 
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
