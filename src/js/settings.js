@@ -61,8 +61,14 @@ export const select = {
   },
   booking: {
     peopleAmount: '.people-amount',
+    peopleAmountInput: '.people-amount input',
     hoursAmount: '.hours-amount',
+    hoursAmountInput: '.hours-amount input',
     tables: '.floor-plan .table',
+    phone: '.order-confirmation input[name="phone"]',
+    email: '.order-confirmation input[name="address"]',
+    bookTable: '.order-confirmation button', 
+    starters: '.booking-form [type="checkbox"]',
   },
   nav: {
     links: '.main-nav a',
