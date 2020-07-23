@@ -1,1 +1,1 @@
-https://git.heroku.com/hiorii-pizzeria.git
+https://hiorii-pizzeria.herokuapp.com/
