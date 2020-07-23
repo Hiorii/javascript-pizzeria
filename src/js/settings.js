@@ -91,6 +91,9 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    slideRed: 'color-red',
+    slideYellow: 'color-yellow',
+    slideGreen: 'color-green',
   },
   nav: {
     active: 'active',

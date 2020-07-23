@@ -1,7 +1,7 @@
-import {templates, select, settings, classNames} from '/js/settings.js';
-import AmountWidget from '/js/components/AmountWidget.js';
-import DatePicker from '/js/components/DatePicker.js';
-import HourPicker from '/js/components/HourPicker.js';
+import {templates, select, settings, classNames} from '../settings.js';
+import AmountWidget from '../components/AmountWidget.js';
+import DatePicker from '../components/DatePicker.js';
+import HourPicker from '../components/HourPicker.js';
 import utils from '../utils.js';
 
 class Booking {
@@ -118,7 +118,9 @@ class Booking {
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
     let allAvailable = false;
+    let hourArray = thisBooking.booked[thisBooking.date][thisBooking.hour];
 
     if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined'
@@ -132,6 +134,23 @@ class Booking {
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
+      if(hourArray.length === 0){
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);        
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
+      } else if(hourArray.length === 1){
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
+      } else if(hourArray.length === 2){
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideYellow);        
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
+      } else if(hourArray.length === 3) {
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideRed);   
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);     
+      }   
       if(
         !allAvailable
         &&
@@ -222,6 +241,7 @@ class Booking {
     thisBooking.dom.email = document.querySelector(select.booking.email);
     thisBooking.dom.submit = document.querySelector(select.booking.bookTable);
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    thisBooking.dom.rangeSlider = document.querySelector('.range-slider');
   }
 
   initWidgets(){

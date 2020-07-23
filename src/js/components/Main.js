@@ -1,6 +1,4 @@
-import {select, templates} from '/js/settings.js';
-
-
+import {select, templates} from '../settings.js';
 
 class Main{
   constructor(mainElement){
@@ -13,8 +11,6 @@ class Main{
   render(mainElement){
     const thisMain = this;
 
-    console.log(thisMain);
-
     const generatedHTML = templates.main();
 
     thisMain.dom = {};
@@ -22,7 +18,6 @@ class Main{
     thisMain.dom.wrapper.innerHTML = generatedHTML;
 
     thisMain.dom.naviItems = document.querySelector(select.main.naviItems);
-    console.log(thisMain.naviItems);
   }
 
 }
