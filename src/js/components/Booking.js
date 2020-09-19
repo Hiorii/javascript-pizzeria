@@ -64,7 +64,7 @@ class Booking {
           eventRepeatResponse.json(),
         ]);
       })
-      .then(function([bookings, eventsCurrent, eventsRepeat]){        
+      .then(function([bookings, eventsCurrent, eventsRepeat]){
         thisBooking.parsedData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -121,7 +121,7 @@ class Booking {
 
     let allAvailable = false;
     let hourArray = thisBooking.booked[thisBooking.date][thisBooking.hour];
-
+    console.log(hourArray);
     if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined'
       ||
@@ -135,7 +135,7 @@ class Booking {
         tableId = parseInt(tableId);
       }
       if(hourArray.length === 0){
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);        
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
       } else if(hourArray.length === 1){
@@ -143,14 +143,14 @@ class Booking {
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
       } else if(hourArray.length === 2){
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideYellow);        
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideYellow);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
       } else if(hourArray.length === 3) {
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideRed);   
+        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideRed);
         thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);     
-      }   
+        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);
+      }
       if(
         !allAvailable
         &&
@@ -178,8 +178,8 @@ class Booking {
     for(let table of thisBooking.dom.tables){
       table.addEventListener('click', function(){
         table.classList.add(classNames.booking.tableBooked);
-        thisBooking.selectedTable = table.getAttribute(settings.booking.tableIdAttribute);        
-      });     
+        thisBooking.selectedTable = table.getAttribute(settings.booking.tableIdAttribute);
+      });
     }
     //thisBooking.updateDOM();
   }

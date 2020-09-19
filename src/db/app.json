@@ -48,7 +48,7 @@
     {
       "id": "pizza",
       "name": "Nonna Alba's Pizza",
-      "price": 24,
+      "price": 30,
       "description": "The true taste of Italy &ndash; homemade pizza as prepared by our grandmothers in old-fashoned brick ovens. Choose your favorite topping and enjoy your comfort food! All ingredients come straight from eco-friendly, trusted farms in the Italian countryside.",
       "images": [
         "<img class=\"active\" src=\"images/pizza/crust.svg\">",
@@ -206,17 +206,17 @@
   "event": [
     {
       "id": 1,
-      "date": "2020-07-24",
+      "date": "2020-09-17",
       "hour": "12:30",
       "table": 1,
       "repeat": false,
-      "duration": 4,
+      "duration": 3,
       "ppl": 3,
       "starters": []
     },
     {
       "id": 2,
-      "date": "2020-07-24",
+      "date": "2020-07-30",
       "hour": "16:00",
       "table": 3,
       "repeat": "daily",
@@ -226,7 +226,7 @@
     },
     {
       "id": 3,
-      "date": "2020-07-24",
+      "date": "2020-07-30",
       "hour": "12:00",
       "table": 3,
       "repeat": "daily",
@@ -236,7 +236,7 @@
     },
     {
       "id": 4,
-      "date": "2020-07-24",
+      "date": "2020-07-30",
       "hour": "13:00",
       "table": 2,
       "repeat": "daily",
@@ -246,7 +246,7 @@
     },
     {
       "id": 5,
-      "date": "2020-07-24",
+      "date": "2020-07-30",
       "hour": "18:00",
       "table": 2,
       "repeat": "daily",
@@ -257,7 +257,7 @@
   ],
   "booking": [
     {
-            
+
     }
   ]
 }

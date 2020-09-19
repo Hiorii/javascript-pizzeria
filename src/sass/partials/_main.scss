@@ -4,7 +4,7 @@
   margin: 90px;
   @include flex(row, center, center);
   flex-wrap: wrap;
-  
+
   a {
     @include flex(row, center, center);
     flex-wrap: wrap;
@@ -34,7 +34,7 @@
     }
   }
 
-  a:hover {     
+  a:hover {
     p {
       text-align: center;
       flex: 0 0 100%;
@@ -71,11 +71,11 @@
   @include flex(row, center, space-between);
   margin: 90px;
 
-  .advert-slider {    
+  .advert-slider {
     overflow: hidden;
 
     .advert-circles {
-      text-align: center;      
+      text-align: center;
     }
   }
 
@@ -106,9 +106,13 @@
     }
   }
 
-  img {
+  .advert-img {
+    background-image: url("../../images/main/pizza-3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 20vh;
-    width: 15vh;
+    width: 70vh;
   }
 }
 
@@ -151,13 +155,17 @@
   flex-wrap: wrap;
 
   .gallery-pic {
-    position: relative;
+    width: 25vh;
+    height: 25vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 7%;
+    margin-top: 20px;
 
     .gallery-icons {
       display: none;
-      position: absolute;
-      top: 50%;
-      left: 40%;
+      height: 100%;
 
       .fas {
         color: white;
@@ -169,26 +177,27 @@
         font-size: 25px;
       }
     }
-    
-    img {
-      border-radius: 7%;
-      margin-top: 20px;
-      width: 17vh;
-      height: 20vh;
-      filter: brightness(100%);
-    }
   }
 
   .gallery-pic:hover {
-    .gallery-icons {
-      display: block;
-    }
+    opacity: 0.7;
 
-    img {
-      opacity: 0.7;
-      filter: brightness(30%);
+    .gallery-icons {
+      @include flex(row, center, center);
     }
   }
+
+  #gallery-pic1 {background-image: url("../../images/main/pizza-1.jpg");}
+
+  #gallery-pic2 {background-image: url("../../images/main/pizza-9.jpg");}
+
+  #gallery-pic3 {background-image: url("../../images/main/pizza-8.jpg");}
+
+  #gallery-pic4 {background-image: url("../../images/main/pizza-4.jpg");}
+
+  #gallery-pic5 {background-image: url("../../images/main/pizza-5.jpg");}
+
+  #gallery-pic6 {background-image: url("../../images/main/pizza-6.jpg");}
 }
 
 /* Footer */
@@ -225,26 +234,26 @@
 }
 
 @media (max-width: 767px) {
-  .footer-bot  ul {     
+  .footer-bot  ul {
     margin: 0;
     text-align: right;
-    padding: 7px;     
+    padding: 7px;
   }
-  
+
   .navi-items {
     a:nth-child(1) {
-      flex: 0 0 98%;      
+      flex: 0 0 98%;
     }
-  
+
     a:nth-child(2) {
       flex: 0 0 98%;
-    }  
+    }
   }
 
   .cart {
     top: ($base-size * 9.7);
     left: ($base-size * 0.1);
-  }  
+  }
 }
 
 @media (min-width: 861px) and (max-width: 1201px){
@@ -254,13 +263,13 @@
 }
 
 @media (max-width: 521px) {
-  .advert-text { 
-    p {     
-      display: none;    
+  .advert-text {
+    p {
+      display: none;
     }
 
     h3 {
-      margin-top: 7rem;    
-    }  
+      margin-top: 7rem;
+    }
   }
 }
