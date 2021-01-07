@@ -13,6 +13,7 @@ class Booking {
     thisBooking.getData();
     thisBooking.pickedTable();
     thisBooking.makeReservation();
+    thisBooking.rangeSliderColor();
   }
 
   selectedTable;
@@ -115,13 +116,10 @@ class Booking {
 
   updateDOM(){
     const thisBooking = this;
-
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
     let allAvailable = false;
-    let hourArray = thisBooking.booked[thisBooking.date][thisBooking.hour];
-    console.log(hourArray);
     if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined'
       ||
@@ -134,23 +132,6 @@ class Booking {
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
-      if(hourArray.length === 0){
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
-      } else if(hourArray.length === 1){
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideGreen);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
-      } else if(hourArray.length === 2){
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideYellow);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideRed);
-      } else if(hourArray.length === 3) {
-        thisBooking.dom.rangeSlider.classList.add(classNames.booking.slideRed);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideYellow);
-        thisBooking.dom.rangeSlider.classList.remove(classNames.booking.slideGreen);
-      }
       if(
         !allAvailable
         &&
@@ -161,6 +142,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    thisBooking.rangeSliderColor();
   }
 
   makeReservation(){
@@ -212,6 +194,7 @@ class Booking {
       },
       body: JSON.stringify(reservation),
     };
+    console.log(options);
     fetch(url, options)
       .then(function(response){
         return response.json();
@@ -242,6 +225,34 @@ class Booking {
     thisBooking.dom.submit = document.querySelector(select.booking.bookTable);
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
     thisBooking.dom.rangeSlider = document.querySelector('.range-slider');
+  }
+
+  rangeSliderColor() {
+    const thisBooking = this;
+    const currentTime =  thisBooking.booked[thisBooking.datePicker.correctValue];
+    console.log(currentTime);
+    const rangeSlider = document.querySelector('.rangeSlider');
+    let percentage = 0;
+    const colorGrad = [];
+    for (let i = 12; i < 24; i += 0.5) {
+
+      console.log(typeof currentTime[i]);
+      percentage += 100 / 24;
+      if (typeof currentTime == 'undefined' || currentTime[i].length === 1) {
+        let color = `green ${percentage}%`;
+        //console.log(color);
+        colorGrad.push(color);
+      } else if (currentTime[i].length === 2) {
+        let color = `orange ${percentage}%`;
+        colorGrad.push(color);
+      } else {
+        let color = `red ${percentage}%`;
+        colorGrad.push(color);
+      }
+    }
+    const linearGrad = colorGrad.join();
+    const gradient = `linear-gradient(to right, ${linearGrad})`;
+    rangeSlider.style.backgroundImage = gradient;
   }
 
   initWidgets(){

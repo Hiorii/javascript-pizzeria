@@ -69,7 +69,7 @@ export const select = {
     tables: '.floor-plan .table',
     phone: '.order-confirmation input[name="phone"]',
     email: '.order-confirmation input[name="address"]',
-    bookTable: '.order-confirmation button', 
+    bookTable: '.order-confirmation button',
     starters: '.booking-form [type="checkbox"]',
   },
   nav: {
