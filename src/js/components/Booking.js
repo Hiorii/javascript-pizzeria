@@ -43,11 +43,11 @@ class Booking {
 
     const urls = {
       booking:      settings.db.url + '/' + settings.db.booking
-                                    + '?' + params.booking.join('&'),
+        + '?' + params.booking.join('&'),
       eventCurrent: settings.db.url + '/' + settings.db.event
-                                    + '?' + params.eventCurrent.join('&'),
+        + '?' + params.eventCurrent.join('&'),
       eventRepeat:  settings.db.url + '/' + settings.db.event
-                                    + '?' + params.eventRepeat.join('&'),
+        + '?' + params.eventRepeat.join('&'),
     };
 
     Promise.all([
@@ -97,6 +97,7 @@ class Booking {
   }
 
   makeBooked(date, hour, duration, table){
+    if(!table) return;
     const thisBooking = this;
 
     if(typeof thisBooking.booked[date] == 'undefined'){
@@ -229,26 +230,29 @@ class Booking {
 
   rangeSliderColor() {
     const thisBooking = this;
-    const currentTime =  thisBooking.booked[thisBooking.datePicker.correctValue];
-    console.log(currentTime);
+    const currentTime = thisBooking.booked && thisBooking.booked[thisBooking.datePicker.correctValue];
     const rangeSlider = document.querySelector('.rangeSlider');
     let percentage = 0;
     const colorGrad = [];
+    let lastGradPoint = 0;
     for (let i = 12; i < 24; i += 0.5) {
-
-      console.log(typeof currentTime[i]);
       percentage += 100 / 24;
-      if (typeof currentTime == 'undefined' || currentTime[i].length === 1) {
-        let color = `green ${percentage}%`;
-        //console.log(color);
+      if(!currentTime || !currentTime[i]) {
+        let color = `green ${lastGradPoint}% ${Math.floor(percentage)}%`;
+        colorGrad.push(color);
+        continue;
+      }
+      if (currentTime[i].length === 0 || currentTime[i].length === 1) {
+        let color = `green ${lastGradPoint}% ${Math.floor(percentage)}%`;
         colorGrad.push(color);
       } else if (currentTime[i].length === 2) {
-        let color = `orange ${percentage}%`;
+        let color = `orange ${lastGradPoint}% ${Math.floor(percentage)}%`;
         colorGrad.push(color);
       } else {
-        let color = `red ${percentage}%`;
+        let color = `red ${lastGradPoint}% ${Math.floor(percentage)}%`;
         colorGrad.push(color);
       }
+      lastGradPoint = percentage;
     }
     const linearGrad = colorGrad.join();
     const gradient = `linear-gradient(to right, ${linearGrad})`;
